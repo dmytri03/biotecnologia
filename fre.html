@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubicación de México</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .navbar {
+            background-color:greenyellow;
+            overflow: hidden;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .content {
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .slideshow-container {
+            position: relative;
+            max-width: 1000px;
+            margin: auto;
+            overflow: hidden;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+        }
+        .slides {
+            display: none;
+            width: 100%;
+        }
+        .slides img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .caption {
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            position: absolute;
+            bottom: 8px;
+            width: 100%;
+            padding: 8px 12px;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        #map {
+            height: 500px;
+            width: 100%;
+            margin: 20px 0;
+        }
+        .download-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 20px 0;
+            font-size: 16px;
+            color: white;
+            background-color: darkred;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: background-color 0.3s ease;
+        }
+        .download-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+    <script>
+        function initMap() {
+            const mexico = { lat: 23.6345, lng: -102.5528 };
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 5,
+                center: mexico
+            });
+            new google.maps.Marker({
+                position: mexico,
+                map: map
+            });
+        }
+
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slides');
+
+        function showSlides() {
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = 'none';
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {
+                slideIndex = 1;
+            }
+            slides[slideIndex - 1].style.display = 'block';
+            setTimeout(showSlides, 3000); // Cambia la imagen cada 3 segundos
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            showSlides();
+        });
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#ubicacion">Ubicación</a>
+        <a href="#galeria">Galería</a>
+        <a href="#mapa">Mapa</a>
+    </div>
+
+    <div class="content">
+        <section id="ubicacion">
+            <h1>Ubicación de México</h1>
+            <p>México se encuentra en la parte meridional de América del Norte. Limita al norte con los Estados Unidos, al sur y al oeste con el océano Pacífico, al sureste con Guatemala, Belice y el mar Caribe, y al este con el golfo de México. Su vasta geografía incluye playas, montañas, desiertos y selvas, haciendo de México un país de gran diversidad natural y cultural.</p>
+            <a href="logo2.jpg"s download="Ubicacion_de_Mexico.pdf" class="download-btn">Descargar Información</a>
+        </section>
+
+        <section id="galeria">
+            <h2>Galería de Imágenes</h2>
+            <div class="slideshow-container">
+                <div class="slides active">
+                    <img src="cety3.jpg" alt="Imagen 1">
+                    <div class="caption">Pátzcuaro</div>
+                </div>
+                <div class="slides">
+                    <img src="cety2.jpg" alt="Imagen 2">
+                    <div class="caption">Morelia</div>
+                </div>
+                <div class="slides">
+                    <img src="cety.jpg" alt="Imagen 3">
+                    <div class="caption">Uruapan</div>
+                </div>
+                <!-- Puedes agregar más imágenes siguiendo el mismo formato -->
+            </div>
+        </section>
+
+        <section id="mapa">
+            <h2>Mapa Interactivo</h2>
+            <div id="map"></div>
+        </section>
+    </div>
+</body>
+</html>
